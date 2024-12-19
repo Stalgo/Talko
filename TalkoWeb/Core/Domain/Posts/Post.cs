@@ -11,4 +11,6 @@ public class Post : BaseEntity
 
     public int Votes { get; set; } = 0; // Updated from user voted function
 
+    //test
+
 }
