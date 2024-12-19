@@ -9,6 +9,6 @@ public class Post : BaseEntity
 
     public string PostContent { get; set; } = string.Empty;
 
-    public int Votes { get; set; } = 0; // Updated when from user voted function
+    public int Votes { get; set; } = 0; // Updated from user voted function
 
 }
