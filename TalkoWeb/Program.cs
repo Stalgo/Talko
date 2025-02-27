@@ -8,9 +8,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddSession();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("TalkoDatabase") ?? throw new InvalidOperationException("Connection string for database not found")));
-
-
+builder.Services.AddDbContext<DatabaseContext>(options =>
+    options.UseSqlite(
+        builder.Configuration.GetConnectionString("TalkoDatabase")
+            ?? throw new InvalidOperationException("Connection string for database not found")
+    )
+);
 
 var app = builder.Build();
 

@@ -10,5 +10,4 @@ public class Post : BaseEntity
     public string PostBody { get; set; } = string.Empty;
 
     public int vote { get; set; }
-
 }
