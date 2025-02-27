@@ -7,7 +7,9 @@ public class Post : BaseEntity
     public Guid Owner { get; set; }
     public string PostTitle { get; set; } = string.Empty;
 
-    public string PostBody { get; set; } = string.Empty;
+    public string PostContent { get; set; } = string.Empty;
 
-    public int vote { get; set; }
+    public int Votes { get; set; } = 0; // Updated from user voted function
+
+    //test
 }
