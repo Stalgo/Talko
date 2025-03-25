@@ -1,11 +1,16 @@
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TalkoWeb.Core.Domain.Posts.Aggregates;
+using TalkoWeb.Core.Domain.User.Aggregates;
 using TalkoWeb.SharedKernel;
 
-public class DatabaseContext : IdentityDbContext<TalkoUser>
+public class DatabaseContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
 {
+    public new DbSet<User> Users { get; set; }
     public DbSet<Post> Posts { get; set; } = default!;
+
     private readonly IMediator? _mediator;
 
     public DatabaseContext(DbContextOptions<DatabaseContext> options, IMediator? mediator = null)
@@ -17,20 +22,15 @@ public class DatabaseContext : IdentityDbContext<TalkoUser>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<User>().Property(u => u.FullName).HasMaxLength(200);
     }
 
-    public override async Task<int> SaveChangesAsync(
-        CancellationToken cancellationToken = new CancellationToken()
-    )
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
         int result = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         if (_mediator is null)
             return result;
-        var entitiesWithEvents = ChangeTracker
-            .Entries<BaseEntity>()
-            .Select(e => e.Entity)
-            .Where(e => e.Events.Any())
-            .ToArray();
+        var entitiesWithEvents = ChangeTracker.Entries<BaseEntity>().Select(e => e.Entity).Where(e => e.Events.Any()).ToArray();
         foreach (var entity in entitiesWithEvents)
         {
             var events = entity.Events.ToArray();
