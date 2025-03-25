@@ -26,8 +26,11 @@ namespace TalkoWeb.Core.Domain.User.Aggregates
             set { _identityUser.Id = value; }
         }
 
-        // Add custom properties or methods specific to your domain
-        public string CustomProperty { get; set; }
+        // Add parameterless constructor for EF
+        public User()
+        {
+            _identityUser = new IdentityUser<Guid>(); // Initialize the IdentityUser
+        }
 
         // Constructor to initialize the wrapped IdentityUser
         public User(IdentityUser<Guid> identityUser)
@@ -35,7 +38,6 @@ namespace TalkoWeb.Core.Domain.User.Aggregates
             _identityUser = identityUser;
         }
 
-        // You can also add methods to handle domain-specific logic if needed
         public void UpdateProfile(string fullName, string email)
         {
             FullName = fullName;
