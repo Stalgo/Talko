@@ -4,7 +4,7 @@ namespace TalkoWeb.Core.Domain.Posts
 {
     public class Post : BaseEntity
     {
-        public Guid id { get; private set; }
+        public Guid PostId { get; private set; }
 
         public Guid AuthorId { get; private set; }
         public string PostTitle { get; private set; } = string.Empty;
@@ -15,7 +15,7 @@ namespace TalkoWeb.Core.Domain.Posts
 
         public Post(Guid id, Guid authorId, string title, string content)
         {
-            Id = id;
+            PostId = id;
             AuthorId = authorId;
             PostTitle = title;
             PostContent = content;
