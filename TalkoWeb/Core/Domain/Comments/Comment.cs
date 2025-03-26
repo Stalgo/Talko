@@ -1,12 +1,19 @@
+using System.ComponentModel.DataAnnotations;
 using TalkoWeb.SharedKernel;
 
 namespace TalkoWeb.Core.Domain.Comments
 {
     public class Comment : BaseEntity
     {
-        private Guid CommentId { get; set; }
-        private string CommentContent { get; set; } = string.Empty;
+        [Key]
+        public Guid CommentId { get; private set; }
+        public Guid AuthorId { get; private set; }
+        public string CommentContent { get; set; } = string.Empty;
 
-        public Comment() { }
+        public Comment(Guid authorId, string commentContent)
+        {
+            AuthorId = authorId;
+            CommentContent = commentContent;
+        }
     }
 }

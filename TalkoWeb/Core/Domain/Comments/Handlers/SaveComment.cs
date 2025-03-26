@@ -1,0 +1,37 @@
+using FluentValidation;
+using FluentValidation.Results;
+using MediatR;
+using TalkoWeb.Application;
+using TalkoWeb.Core.Domain.Comments.ValueObjects;
+
+namespace TalkoWeb.Core.Domain.Comments.Handlers
+{
+    public class SaveComment : IRequestHandler<AddComment, Result>
+    {
+        private readonly IValidator<AddComment> _validator;
+        private readonly DatabaseContext _db;
+
+        public SaveComment(IValidator<AddComment> valitdator, DatabaseContext database)
+        {
+            _validator = valitdator;
+            _db = database;
+        }
+
+        public async Task<Result> Handle(AddComment addComment, CancellationToken cancellationToken)
+        {
+            ValidationResult validationResult = await _validator.ValidateAsync(addComment, cancellationToken);
+
+            if (!validationResult.IsValid)
+            {
+                return Result.Failure(validationResult.Errors.Select(e => e.ErrorMessage));
+            }
+
+            Comment comment = new(addComment.authorId, addComment.content);
+
+            await _db.Comment.AddAsync(comment, cancellationToken);
+            await _db.SaveChangesAsync(cancellationToken);
+
+            return Result.Success();
+        }
+    }
+}

@@ -9,7 +9,7 @@ namespace TalkoWeb.Core.Domain.Posts
         public Guid AuthorId { get; private set; }
         public string PostTitle { get; private set; } = string.Empty;
 
-        public string PostContent { get; private set; } = string.Empty;
+        public string PostContent { get; set; } = string.Empty;
 
         public List<Guid> CommentRefereces { get; private set; } = new();
 
