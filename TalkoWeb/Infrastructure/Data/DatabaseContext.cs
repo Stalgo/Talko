@@ -2,13 +2,12 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TalkoWeb.Core.Domain.Posts.Aggregates;
+using TalkoWeb.Core.Domain.Posts;
 using TalkoWeb.Core.Domain.User.Aggregates;
 using TalkoWeb.SharedKernel;
 
 public class DatabaseContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
 {
-    public new DbSet<User> Users { get; set; }
     public DbSet<Post> Posts { get; set; } = default!;
 
     private readonly IMediator? _mediator;
@@ -22,7 +21,6 @@ public class DatabaseContext : IdentityDbContext<IdentityUser<Guid>, IdentityRol
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<User>().Property(u => u.FullName).HasMaxLength(200);
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
