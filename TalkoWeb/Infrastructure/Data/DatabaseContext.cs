@@ -4,12 +4,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TalkoWeb.Core.Domain.Comments;
 using TalkoWeb.Core.Domain.Posts;
-using TalkoWeb.Core.Domain.User.Aggregates;
 using TalkoWeb.SharedKernel;
 
 public class DatabaseContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
 {
-    public DbSet<Comment> Comment { get; set; } = default!;
+    public DbSet<Comment> Comments { get; set; } = default!;
     public DbSet<Post> Posts { get; set; } = default!;
 
     private readonly IMediator? _mediator;

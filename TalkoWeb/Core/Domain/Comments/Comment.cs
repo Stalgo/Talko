@@ -10,6 +10,8 @@ namespace TalkoWeb.Core.Domain.Comments
         public Guid AuthorId { get; private set; }
         public string CommentContent { get; set; } = string.Empty;
 
+        private Comment() { } // dotnet ef
+
         public Comment(Guid authorId, string commentContent)
         {
             AuthorId = authorId;

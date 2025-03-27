@@ -487,6 +487,9 @@ $RECYCLE.BIN/
 TalkoWeb/Infrastructure/Migrations/*.Designer.cs
 TalkoWeb/Infrastructure/Migrations/*Snapshot.cs
 TalkoWeb/Infrastructure/Migrations/*.resx
+TalkoWeb/Migrations/*.Designer.cs
+TalkoWeb/Migrations/*Snapshot.cs
+TalkoWeb/Migrations/*.resx
 
 # EF Core tools and temporary files
 *.db

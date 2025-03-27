@@ -1,9 +1,11 @@
+using System.ComponentModel.DataAnnotations;
 using TalkoWeb.SharedKernel;
 
 namespace TalkoWeb.Core.Domain.Posts
 {
     public class Post : BaseEntity
     {
+        [Key]
         public Guid PostId { get; private set; }
 
         public Guid AuthorId { get; private set; }
@@ -12,6 +14,8 @@ namespace TalkoWeb.Core.Domain.Posts
         public string PostContent { get; set; } = string.Empty;
 
         public List<Guid> CommentRefereces { get; private set; } = new();
+
+        private Post() { } //Dotnet ef
 
         public Post(Guid id, Guid authorId, string title, string content)
         {

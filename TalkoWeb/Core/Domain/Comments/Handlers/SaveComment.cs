@@ -28,7 +28,7 @@ namespace TalkoWeb.Core.Domain.Comments.Handlers
 
             Comment comment = new(addComment.authorId, addComment.content);
 
-            await _db.Comment.AddAsync(comment, cancellationToken);
+            await _db.Comments.AddAsync(comment, cancellationToken);
             await _db.SaveChangesAsync(cancellationToken);
 
             return Result.Success();
