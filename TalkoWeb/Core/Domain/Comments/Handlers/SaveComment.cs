@@ -6,18 +6,18 @@ using TalkoWeb.Core.Domain.Comments.ValueObjects;
 
 namespace TalkoWeb.Core.Domain.Comments.Handlers
 {
-    public class SaveComment : IRequestHandler<AddComment, Result>
+    public class SaveComment : IRequestHandler<SaveCommentDTO, Result>
     {
-        private readonly IValidator<AddComment> _validator;
+        private readonly IValidator<SaveCommentDTO> _validator;
         private readonly DatabaseContext _db;
 
-        public SaveComment(IValidator<AddComment> valitdator, DatabaseContext database)
+        public SaveComment(IValidator<SaveCommentDTO> valitdator, DatabaseContext database)
         {
             _validator = valitdator;
             _db = database;
         }
 
-        public async Task<Result> Handle(AddComment addComment, CancellationToken cancellationToken)
+        public async Task<Result> Handle(SaveCommentDTO addComment, CancellationToken cancellationToken)
         {
             ValidationResult validationResult = await _validator.ValidateAsync(addComment, cancellationToken);
 

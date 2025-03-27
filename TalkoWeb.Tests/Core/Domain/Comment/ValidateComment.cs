@@ -6,11 +6,11 @@ using Xunit;
 
 namespace TalkoWeb.Tests.Core.Domain.Comments
 {
-    public class AddCommentValidatorTests
+    public class CommentValidatorTests
     {
         private readonly AddCommentValidator _validator;
 
-        public AddCommentValidatorTests()
+        public CommentValidatorTests()
         {
             _validator = new AddCommentValidator();
         }
@@ -18,7 +18,7 @@ namespace TalkoWeb.Tests.Core.Domain.Comments
         [Fact]
         public void Should_Have_No_Validation_Errors_When_Comment_Is_Valid()
         {
-            var validComment = new AddComment(Guid.NewGuid(), "This is a valid comment.");
+            var validComment = new SaveCommentDTO(Guid.NewGuid(), "This is a valid comment.");
 
             var result = _validator.TestValidate(validComment);
 
@@ -28,7 +28,7 @@ namespace TalkoWeb.Tests.Core.Domain.Comments
         [Fact]
         public void Should_Have_Validation_Error_When_content_Is_Empty()
         {
-            var invalidComment = new AddComment(Guid.NewGuid(), "");
+            var invalidComment = new SaveCommentDTO(Guid.NewGuid(), "");
 
             var result = _validator.TestValidate(invalidComment);
 
@@ -38,7 +38,7 @@ namespace TalkoWeb.Tests.Core.Domain.Comments
         [Fact]
         public void Should_Have_Validation_Error_When_content_Is_Too_Long()
         {
-            var invalidComment = new AddComment(Guid.NewGuid(), new string('a', 501));
+            var invalidComment = new SaveCommentDTO(Guid.NewGuid(), new string('a', 501));
 
             var result = _validator.TestValidate(invalidComment);
 
@@ -48,7 +48,7 @@ namespace TalkoWeb.Tests.Core.Domain.Comments
         [Fact]
         public void Should_Have_Validation_Error_When_AuthorId_Is_Empty_Guid()
         {
-            var invalidComment = new AddComment(
+            var invalidComment = new SaveCommentDTO(
                 Guid.Empty,
                 "This is a comment." // Invalid GUID
             );

@@ -3,7 +3,7 @@ using TalkoWeb.Core.Domain.Comments.ValueObjects;
 
 namespace TalkoWeb.Core.Domain.Comments.Validators
 {
-    public class AddCommentValidator : AbstractValidator<AddComment>
+    public class AddCommentValidator : AbstractValidator<SaveCommentDTO>
     {
         public AddCommentValidator()
         {

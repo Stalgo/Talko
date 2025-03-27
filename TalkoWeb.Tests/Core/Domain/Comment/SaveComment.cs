@@ -34,7 +34,7 @@ namespace TalkoWeb.Tests.Core.Domain.Comments
 
             // Register DatabaseContext and AddCommentValidator
             services.AddSingleton(_context); // Register the database context
-            services.AddTransient<IValidator<AddComment>, AddCommentValidator>(); // Register the validator
+            services.AddTransient<IValidator<SaveCommentDTO>, AddCommentValidator>(); // Register the validator
             services.AddTransient<SaveComment>();
 
             _serviceProvider = services.BuildServiceProvider();
@@ -47,7 +47,7 @@ namespace TalkoWeb.Tests.Core.Domain.Comments
         public async Task Handle_Should_Save_Comment_To_Database()
         {
             // Arrange
-            var request = new AddComment(Guid.NewGuid(), "This is a test comment.");
+            var request = new SaveCommentDTO(Guid.NewGuid(), "This is a test comment.");
 
             // Act
             var result = await _handler.Handle(request, CancellationToken.None);
