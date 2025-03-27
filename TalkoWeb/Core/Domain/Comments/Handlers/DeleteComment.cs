@@ -1,4 +1,3 @@
-using System.Reflection.Metadata.Ecma335;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using TalkoWeb.Application;
@@ -9,12 +8,10 @@ namespace TalkoWeb.Core.Domain.Comments.Handlers
     public class DeleteComment : IRequestHandler<DeleteCommentDTO, Result>
     {
         private readonly DatabaseContext _db;
-        private List<string> _errors;
 
         public DeleteComment(DatabaseContext database)
         {
             _db = database;
-            _errors = new();
         }
 
         public async Task<Result> Handle(DeleteCommentDTO deleteComment, CancellationToken cancellationToken)
@@ -23,7 +20,7 @@ namespace TalkoWeb.Core.Domain.Comments.Handlers
 
             if (comment is null)
             {
-                return Result.Failure(_errors.Append("Could not delete comment"));
+                return Result.Fail("Could not delete comment");
             }
             return Result.Success();
         }
