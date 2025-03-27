@@ -482,3 +482,12 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Entity Framework Core Migrations
+migrations/*.Designer.cs
+migrations/*Snapshot.cs
+migrations/*.resx
+
+# EF Core tools and temporary files
+*.db
+*.db-journal
