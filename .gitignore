@@ -484,9 +484,9 @@ $RECYCLE.BIN/
 *.swp
 
 # Entity Framework Core Migrations
-migrations/*.Designer.cs
-migrations/*Snapshot.cs
-migrations/*.resx
+TalkoWeb/Infrastructure/Migrations/*.Designer.cs
+TalkoWeb/Infrastructure/Migrations/*Snapshot.cs
+TalkoWeb/Infrastructure/Migrations/*.resx
 
 # EF Core tools and temporary files
 *.db
