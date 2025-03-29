@@ -3,5 +3,5 @@ using TalkoWeb.Application;
 
 namespace TalkoWeb.Core.Domain.Comments.Handlers
 {
-    public record DeleteCommentHandler(Guid authorId, Guid commentId) : IRequest<Result>;
+    public record SaveCommentDTO(Guid AuthorId, Guid PostId, string Content) : IRequest<Result>;
 }

@@ -2,7 +2,6 @@ using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using SQLitePCL;
 using TalkoWeb.Core.Domain.Comments.ValueObjects;
 using TalkoWeb.Core.Domain.Posts;
 using TalkoWeb.Core.Domain.Posts.Handlers;

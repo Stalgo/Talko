@@ -38,7 +38,7 @@ namespace TalkoWeb.Tests.Core.Domain.Comments
             var existingComment = await _context.Comments.FindAsync(comment.CommentId);
             existingComment.Should().NotBeNull();
 
-            var request = new DeleteCommentHandler(comment.AuthorId, comment.CommentId);
+            var request = new DeleteCommentDTO(comment.AuthorId, comment.CommentId);
 
             // Act: Call the handler to delete the comment
             var result = await _handler.Handle(request, CancellationToken.None);
@@ -65,7 +65,7 @@ namespace TalkoWeb.Tests.Core.Domain.Comments
             existingComment.Should().NotBeNull();
             var nonExistingCommentId = Guid.NewGuid();
 
-            var request = new DeleteCommentHandler(comment.AuthorId, nonExistingCommentId);
+            var request = new DeleteCommentDTO(comment.AuthorId, nonExistingCommentId);
 
             // Act: Call the handler to delete the comment
             var result = await _handler.Handle(request, CancellationToken.None);
@@ -88,7 +88,7 @@ namespace TalkoWeb.Tests.Core.Domain.Comments
             existingComment.Should().NotBeNull();
             var nonExistingUserId = Guid.NewGuid();
 
-            var request = new DeleteCommentHandler(nonExistingUserId, comment.CommentId);
+            var request = new DeleteCommentDTO(nonExistingUserId, comment.CommentId);
 
             // Act: Call the handler to delete the comment
             var result = await _handler.Handle(request, CancellationToken.None);
