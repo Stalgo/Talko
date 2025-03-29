@@ -21,9 +21,8 @@ namespace TalkoWeb.Core.Domain.Posts
 
         private Post() { } //Dotnet ef
 
-        public Post(Guid id, Guid authorId, string title, string content)
+        public Post(Guid authorId, string title, string content)
         {
-            PostId = id;
             AuthorId = authorId;
             PostTitle = title;
             PostContent = content;

@@ -26,7 +26,9 @@ namespace TalkoWeb.Tests.Core.Domain.Posts
         [Fact]
         public async Task Handle_Should_Save_Comment_To_Database()
         {
-            //Given
+            //Assert
+            Guid autorId = Guid.NewGuid();
+            var savePostDTO = new SavePostDTO(autorId, "A Title", "Some Content");
 
             //When
 
