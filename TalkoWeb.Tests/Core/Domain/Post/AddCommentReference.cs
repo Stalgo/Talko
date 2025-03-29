@@ -29,19 +29,19 @@ namespace TalkoWeb.Tests.Core.Domain.Posts
         public async Task Handler_Should_Add_CommentReference_To_Post_When_CommentSaved_Is_Raised()
         {
             // Arrange
-            var postId = Guid.NewGuid();
             var postAuthorId = Guid.NewGuid();
-            var post = new Post(postId, postAuthorId, "A New Title", "Some Content");
+            var post = new Post(postAuthorId, "A New Title", "Some Content");
             await _context.Posts.AddAsync(post);
             await _context.SaveChangesAsync();
             // Act
 
             var commentId = Guid.NewGuid();
-            var @event = new CommentSaved(commentId, postId);
+            var @event = new CommentSaved(commentId, post.PostId);
             await _handler.Handle(@event, CancellationToken.None);
 
             // Assert
-            var updatedPost = await _context.Posts.FindAsync(postId);
+            post.PostId.Should().NotBeEmpty();
+            var updatedPost = await _context.Posts.FindAsync(post.PostId);
             updatedPost.Should().NotBeNull();
             updatedPost!.CommentsRefernces.Should().Contain(commentId);
         }
