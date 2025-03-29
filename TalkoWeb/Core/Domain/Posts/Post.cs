@@ -13,7 +13,11 @@ namespace TalkoWeb.Core.Domain.Posts
 
         public string PostContent { get; set; } = string.Empty;
 
-        public List<Guid> CommentRefereces { get; private set; } = new();
+        private List<Guid> _commentReferences = new();
+        public IReadOnlyList<Guid> CommentsRefernces // to prevent exposing object reference, so that lists content cant be modified externaly
+        {
+            get { return _commentReferences; }
+        }
 
         private Post() { } //Dotnet ef
 
@@ -27,7 +31,8 @@ namespace TalkoWeb.Core.Domain.Posts
 
         public void AddCommentReference(Guid commentId)
         {
-            CommentRefereces.Add(commentId);
+            if (!_commentReferences.Contains(commentId))
+                _commentReferences.Add(commentId);
         }
     }
 }

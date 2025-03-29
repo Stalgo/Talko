@@ -5,7 +5,7 @@ using TalkoWeb.Core.Domain.Comments.ValueObjects;
 
 namespace TalkoWeb.Core.Domain.Comments.Handlers
 {
-    public class DeleteComment : IRequestHandler<DeleteCommentDTO, Result>
+    public class DeleteComment : IRequestHandler<DeleteCommentHandler, Result>
     {
         private readonly DatabaseContext _db;
 
@@ -14,7 +14,7 @@ namespace TalkoWeb.Core.Domain.Comments.Handlers
             _db = database;
         }
 
-        public async Task<Result> Handle(DeleteCommentDTO deleteComment, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DeleteCommentHandler deleteComment, CancellationToken cancellationToken)
         {
             Comment? comment = await _db.Comments.SingleOrDefaultAsync(i => i.CommentId == deleteComment.commentId && i.AuthorId == deleteComment.authorId, cancellationToken);
 

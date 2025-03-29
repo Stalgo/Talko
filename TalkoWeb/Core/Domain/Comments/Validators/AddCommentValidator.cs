@@ -1,15 +1,15 @@
 using FluentValidation;
-using TalkoWeb.Core.Domain.Comments.ValueObjects;
+using TalkoWeb.Core.Domain.Comments.Handlers;
 
 namespace TalkoWeb.Core.Domain.Comments.Validators
 {
-    public class AddCommentValidator : AbstractValidator<SaveCommentDTO>
+    public class AddCommentValidator : AbstractValidator<SaveCommentHandler>
     {
         public AddCommentValidator()
         {
-            RuleFor(x => x.content).NotEmpty().WithMessage("Content is required.").Length(1, 500).WithMessage("Content must be between 1 and 500 characters.");
+            RuleFor(x => x.Content).NotEmpty().WithMessage("Content is required.").Length(1, 500).WithMessage("Content must be between 1 and 500 characters.");
 
-            RuleFor(x => x.authorId).NotEmpty().WithMessage("AuthorId is required.").Must(id => id != Guid.Empty).WithMessage("AuthorId must be a valid GUID.");
+            RuleFor(x => x.AuthorId).NotEmpty().WithMessage("AuthorId is required.").Must(id => id != Guid.Empty).WithMessage("AuthorId must be a valid GUID.");
         }
     }
 }
