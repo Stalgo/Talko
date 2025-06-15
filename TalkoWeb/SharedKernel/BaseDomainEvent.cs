@@ -1,9 +1,10 @@
 using MediatR;
 
-namespace TalkoWeb.SharedKernel;
-
-public abstract record BaseDomainEvent : INotification
+namespace TalkoWeb.SharedKernel
 {
-    public Guid EventId { get; private set; } = Guid.NewGuid();
-    public DateTimeOffset DateOccurred { get; protected set; } = DateTimeOffset.UtcNow;
+    public abstract record BaseDomainEvent : INotification
+    {
+        public Guid EventId { get; private set; } = Guid.NewGuid();
+        public DateTimeOffset DateOccurred { get; protected set; } = DateTimeOffset.UtcNow;
+    }
 }

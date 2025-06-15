@@ -1,7 +1,8 @@
-namespace TalkoWeb.SharedKernel;
-
-public abstract class BaseEntity
+namespace TalkoWeb.SharedKernel
 {
-    public Guid Id { get; set; }
-    public List<BaseDomainEvent> Events = new();
+    public abstract class BaseEntity
+    {
+        public Guid Id { get; set; }
+        public List<BaseDomainEvent> Events = new();
+    }
 }
