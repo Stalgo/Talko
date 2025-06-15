@@ -6,10 +6,8 @@ namespace TalkoWeb.Core.Domain.Posts.Handlers
     public class AddCommentToPost : INotificationHandler<CommentSaved>
     {
         private readonly DatabaseContext _db;
-        private readonly ILogger<AddCommentToPost> _logger;
-        public AddCommentToPost(DatabaseContext db, ILogger<AddCommentToPost> logger)
+        public AddCommentToPost(DatabaseContext db)
         {
-            _logger = logger;
             _db = db;
         }
 
@@ -22,7 +20,7 @@ namespace TalkoWeb.Core.Domain.Posts.Handlers
             {
                 post.AddCommentReference(commentDTO.CommentId);
                 int affectedRows = await _db.SaveChangesAsync(cancellationToken);
-                _logger.LogInformation("{affectedRows} records updated", affectedRows);
+                Console.WriteLine($"{affectedRows} records updated", affectedRows);
 
             }
         }
